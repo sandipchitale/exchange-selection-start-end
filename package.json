@@ -1,0 +1,86 @@
+{
+    "name": "exchange-selection-start-end",
+    "displayName": "Exchange selection start and end, Extend selection, Toggle selection mode",
+    "icon": "images/icon.png",
+    "description": "Exchange selection start and end similar to Emacss exchange-point-and-mark command, Extend selection, Toggle selection mode.",
+    "version": "2.0.0",
+    "publisher": "sandipchitale",
+    "author": {
+        "name": "Sandip Chitale"
+    },
+    "maintainers": [
+        "Sandip Chitale <sandipchitale@gmail.com>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sandipchitale/exchange-selection-start-end"
+    },
+    "engines": {
+        "vscode": "^1.19.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:exchangeSelectionStartAndEnd.exchange",
+        "onCommand:exchangeSelectionStartAndEnd.extendSelection",
+        "onCommand:exchangeSelectionStartAndEnd.toggleSelectionMode"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration": {
+            "properties": {
+                "exchangeSelectionStartAndEnd.columnSelectionMode": {
+                    "type": "string",
+                    "default": "short",
+                    "description": "Specifies how the line length affects selection in that line. Possible values are short | short+pad | partial | partial+pad | full."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "exchangeSelectionStartAndEnd.exchange",
+                "title": "Exchange selection start and end"
+            },
+            {
+                "command": "exchangeSelectionStartAndEnd.extendSelection",
+                "title": "Extend selection with text ( [prefix][|[suffix]] )"
+            },
+            {
+                "command": "exchangeSelectionStartAndEnd.toggleSelectionMode",
+                "title": "Toggle selection mode"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "exchangeSelectionStartAndEnd.exchange",
+                "key": "shift+alt+x",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "exchangeSelectionStartAndEnd.extendSelection",
+                "key": "shift+ctrl+alt+x",
+                "mac": "shift+cmd+alt+x",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "exchangeSelectionStartAndEnd.toggleSelectionMode",
+                "key": "shift+alt+s",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
