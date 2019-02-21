@@ -258,7 +258,6 @@ function activate(context) {
         'full',
       ]).then((csm) => {
         if (csm) {
-          console.log(csm);
           const config = vscode.workspace.getConfiguration(
             'exchangeSelectionStartAndEnd'
           );
