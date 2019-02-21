@@ -3,7 +3,7 @@
     "displayName": "Exchange selection start and end, Extend selection, Toggle selection mode",
     "icon": "images/icon.png",
     "description": "Exchange selection start and end similar to Emacss exchange-point-and-mark command, Extend selection, Toggle selection mode.",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "publisher": "sandipchitale",
     "author": {
         "name": "Sandip Chitale"
@@ -49,6 +49,10 @@
             {
                 "command": "exchangeSelectionStartAndEnd.toggleSelectionMode",
                 "title": "Toggle selection mode"
+            },
+            {
+                "command": "exchangeSelectionStartAndEnd.selectSelectionMode",
+                "title": "Select selection mode"
             }
         ],
         "keybindings": [

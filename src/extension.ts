@@ -247,6 +247,31 @@ function activate(context) {
   );
   context.subscriptions.push(disposable);
 
+  disposable = vscode.commands.registerCommand(
+    'exchangeSelectionStartAndEnd.selectSelectionMode',
+    function() {
+      vscode.window.showQuickPick([
+        'short',
+        'partial',
+        'short+pad',
+        'partial+pad',
+        'full',
+      ]).then((csm) => {
+        if (csm) {
+          console.log(csm);
+          const config = vscode.workspace.getConfiguration(
+            'exchangeSelectionStartAndEnd'
+          );
+          if (config) {
+            config.update('columnSelectionMode', csm, true);
+            setStatus();
+          }
+        }
+      });
+    }
+  );
+  context.subscriptions.push(disposable);
+
   const eventSubscription = vscode.workspace.onDidChangeConfiguration(
     setStatus
   );
@@ -261,6 +286,8 @@ function activate(context) {
       1000
     );
     _statusBarItem.tooltip = 'Column Selection Mode';
+    _statusBarItem.command = 'exchangeSelectionStartAndEnd.selectSelectionMode';
+
     setStatus();
     _statusBarItem.show();
   }
