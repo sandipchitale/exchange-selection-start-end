@@ -242,7 +242,7 @@ function activate(context) {
   context.subscriptions.push(disposable);
 
   let disposable = vscode.commands.registerCommand(
-    'normalizeSelectionStartAndEnd.exchange',
+    'normalizeSelectionStartAndEnd.normalize',
     function() {
       const editor = vscode.window.activeTextEditor;
       const selections = editor.selections;
