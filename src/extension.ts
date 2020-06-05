@@ -21,6 +21,26 @@ function exchangeSelectionStartAndEnd(editor, selections) {
   editor.selections = newSelections;
 }
 
+function normalizeSelectionStartAndEnd(editor, selections) {
+  let newReversed = !selections[0].isReversed;
+  let newSelections = [];
+  for (let i = 0; i < selections.length; i++) {
+    let selection = selections[i];
+    let start, end;
+    if (selection.isReversed != newReversed) {
+      start = selection.start;
+      end = selection.end;
+    } else {
+      start = selection.end;
+      end = selection.start;
+    }
+    newSelections.push(
+      new vscode.Selection(start.line, start.character, end.line, end.character)
+    );
+  }
+  editor.selections = newSelections;
+}
+
 function extendSelection(editor, selections) {
   vscode.window
     .showInputBox({
@@ -219,8 +239,20 @@ function activate(context) {
       }
     }
   );
-
   context.subscriptions.push(disposable);
+
+  let disposable = vscode.commands.registerCommand(
+    'normalizeSelectionStartAndEnd.normalize',
+    function() {
+      const editor = vscode.window.activeTextEditor;
+      const selections = editor.selections;
+      if (selections && selections.length > 0) {
+        normalizeSelectionStartAndEnd(editor, selections);
+      }
+    }
+  );
+  context.subscriptions.push(disposable);
+
   disposable = vscode.commands.registerCommand(
     'exchangeSelectionStartAndEnd.extendSelection',
     function() {
